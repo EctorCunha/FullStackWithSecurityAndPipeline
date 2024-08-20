@@ -20,7 +20,14 @@ jobs:
                     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
                         
                 - name: Install Dependencies
-                  run: npm install
+                  run: 
+                    cd backend
+                    npm install
+
+                - name: Install Dependencies
+                  run: 
+                    cd backend
+                    npm install
 
 
         testing:
@@ -38,7 +45,9 @@ jobs:
                     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
                                 
                 - name: Run tests
-                  run: npm run test  
+                  run: 
+                    cd frontend
+                    npm run test  
 
         
         security:
@@ -70,6 +79,8 @@ jobs:
                     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
                                         
                 - name: Run security tests
-                  run: npm run snyk
+                  run: 
+                    cd frontend
+                    npm run snyk
                   
                 
