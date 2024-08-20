@@ -45,9 +45,7 @@ jobs:
                     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
                                 
                 - name: Run tests
-                  run: |
-                    cd frontend
-                    npm run test  
+                  run: npm run test  
 
         
         security:
