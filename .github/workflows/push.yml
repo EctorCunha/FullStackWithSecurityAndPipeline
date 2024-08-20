@@ -1,86 +1,195 @@
-name: Push to branch
+name: Push to release branch
 
 on:
-    push:
-      branches:
-        - release
+  push:
+    branches:
+      - release
 
 jobs:
-        install:
-            name: Installing Packages
-            runs-on: ubuntu-latest
-            steps:
-                - name: Checkout
-                  uses: actions/checkout@v3
+  install:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
 
-                - name: Cache node_modules
-                  uses: actions/cache@v2
-                  with:
-                    path: node_modules
-                    key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache Backend Node Modules
+        uses: actions/cache@v3
+        with:
+          path: backend/node_modules
+          key: ${{ runner.os }}-backend-${{ hashFiles('backend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-backend-
+
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Cache Frontend Node Modules
+        uses: actions/cache@v3
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-frontend-
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          npm install
+
+  test:
+    name: Run Frontend Tests
+    runs-on: ubuntu-latest
+    needs: install
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache Frontend Node Modules
+        uses: actions/cache@v3
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-frontend-
+
+      - name: Run Frontend Tests
+        run: |
+          cd frontend
+          npm test
+
+  security:
+    name: Run Security Tests with Snyk
+    runs-on: ubuntu-latest
+    needs: install
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache Backend Node Modules
+        uses: actions/cache@v3
+        with:
+          path: backend/node_modules
+          key: ${{ runner.os }}-backend-${{ hashFiles('backend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-backend-
+
+      - name: Cache Frontend Node Modules
+        uses: actions/cache@v3
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-frontend-
+
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      - name: Authenticate Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
+      - name: Run Backend Snyk Security Tests
+        run: |
+          cd backend
+          snyk test
+
+      - name: Run Frontend Snyk Security Tests
+        run: |
+          cd frontend
+          snyk test
+
+
+
+
+
+# name: Push to branch
+
+# on:
+#     push:
+#       branches:
+#         - release
+
+# jobs:
+#         install:
+#             name: Installing Packages
+#             runs-on: ubuntu-latest
+#             steps:
+#                 - name: Checkout
+#                   uses: actions/checkout@v3
+
+#                 - name: Cache node_modules
+#                   uses: actions/cache@v2
+#                   with:
+#                     path: node_modules
+#                     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
                         
-                - name: Install Backend Dependencies
-                  run: |
-                    cd backend
-                    npm install
+#                 - name: Install Backend Dependencies
+#                   run: |
+#                     cd backend
+#                     npm install
 
-                - name: Install Frontend Dependencies
-                  run: |
-                    cd backend
-                    npm install
+#                 - name: Install Frontend Dependencies
+#                   run: |
+#                     cd backend
+#                     npm install
 
 
-        testing:
-            name: Run unit test
-            runs-on: ubuntu-latest
-            needs: install
-            steps:
-                - name: Checkout
-                  uses: actions/checkout@v3
+#         testing:
+#             name: Run unit test
+#             runs-on: ubuntu-latest
+#             needs: install
+#             steps:
+#                 - name: Checkout
+#                   uses: actions/checkout@v3
         
-                - name: Restore node_modules
-                  uses: actions/cache@v2
-                  with:
-                    path: node_modules
-                    key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+#                 - name: Restore node_modules
+#                   uses: actions/cache@v2
+#                   with:
+#                     path: node_modules
+#                     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
                                 
-                - name: Run tests
-                  run: |
-                    cd frontend
-                    npm test  
+#                 - name: Run tests
+#                   run: |
+#                     cd frontend
+#                     npm test  
 
         
-        security:
-            name: Run snyk test
-            runs-on: ubuntu-latest
-            needs: install
-            steps:               
-                - uses: actions/checkout@master
-                - name: Run Snyk to test for vulnerabilities
-                  uses: snyk/actions/node@master
-                  env:
-                    SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-                  with:
-                    args: --severity-threshold=high
+#         security:
+#             name: Run snyk test
+#             runs-on: ubuntu-latest
+#             needs: install
+#             steps:               
+#                 - uses: actions/checkout@master
+#                 - name: Run Snyk to test for vulnerabilities
+#                   uses: snyk/actions/node@master
+#                   env:
+#                     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+#                   with:
+#                     args: --severity-threshold=high
                   
                   
-        securitytest:
-            name: Run security test
-            runs-on: ubuntu-latest
-            needs: install
-            steps:
-                - name: Checkout
-                  uses: actions/checkout@v3
+#         securitytest:
+#             name: Run security test
+#             runs-on: ubuntu-latest
+#             needs: install
+#             steps:
+#                 - name: Checkout
+#                   uses: actions/checkout@v3
                 
-                - name: Restore node_modules
-                  uses: actions/cache@v2
-                  with:
-                    path: node_modules
-                    key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+#                 - name: Restore node_modules
+#                   uses: actions/cache@v2
+#                   with:
+#                     path: node_modules
+#                     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
                                         
-                - name: Run security tests
-                  run: |
-                    cd frontend
-                    snyk test
+#                 - name: Run security tests
+#                   run: |
+#                     cd frontend
+#                     snyk test
                   
                 
