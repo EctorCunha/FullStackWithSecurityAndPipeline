@@ -19,13 +19,13 @@ jobs:
                     path: node_modules
                     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
                         
-                - name: Install Dependencies
-                  run: 
+                - name: Install Backend Dependencies
+                  run: |
                     cd backend
                     npm install
 
-                - name: Install Dependencies
-                  run: 
+                - name: Install Frontend Dependencies
+                  run: |
                     cd backend
                     npm install
 
