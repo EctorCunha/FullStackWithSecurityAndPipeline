@@ -1,0 +1,196 @@
+#containerListPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* width: 100vw; */
+}
+
+.logoutContainer{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 10vw;
+  height: 5vh;
+  border: none;
+  border-radius: 6px;
+  margin: .3rem 0;
+  background-color: #5ab4bb;
+  position: absolute;
+  top: 0;
+  right: 3rem;
+  cursor: pointer;
+}
+
+.logout{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.h1Titulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  margin: 3rem;
+}
+
+
+/* Form */
+.formListPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  background-color: rgb(104, 86, 65);
+}
+
+.titleForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+
+.divsLabelsInputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2rem;
+  margin: 1rem 0;
+}
+
+.labelsListPage {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 30%;
+  font-size: min(1.2rem, 2vw);
+  font-weight: bold;
+  color: #fff;
+}
+
+.inputsListPage {
+  width: 60%;
+  height: 2rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  padding: 0 0.5rem;
+}
+
+.bntCadastrar {
+  width: 100%;
+  height: 2rem;
+  background-color: #5ab4bb;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: min(1.5rem, 1.5vw);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Filtro por página */
+.peoplePerPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    margin: 0 auto;
+    background-color: rgb(78, 110, 82);
+    color: aliceblue;
+    gap: 2rem;
+}
+
+#people{
+  border-radius: 5px;
+  background-color: aliceblue;
+}
+
+/* Tabela */
+table{
+    width: 90vw;
+    /* margin: 0 auto; */
+    background-color: rgb(167, 160, 166);
+}
+
+table,
+th,
+td {
+  word-break: break-all;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: .2rem;
+  text-align: center;
+}
+
+.actionsEditDelete{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 10vw;
+}
+
+.iconsEditTrash{
+    width: 1.7rem;
+    height: 5rem;
+    cursor: pointer;
+}
+
+
+.pagesContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90vw;
+  margin: 0.5rem;
+}
+
+.pages{
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.btnPages{
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  background-color: #5f8d90;
+  border: none;
+  border-radius: 0.2rem;
+  color: #fff;
+  font-size: min(1.2rem, 1.5vw);
+  margin: 0 0.2rem;
+  cursor: pointer;
+}
+
+@media (min-width: 1045px) {
+  .btnPages{
+    margin: .2rem .3rem;
+  }
+}
+
+.btnPages:focus{
+  outline: none;
+  background-color: red;
+}
+
+.icons {
+  width: 1.5rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+}

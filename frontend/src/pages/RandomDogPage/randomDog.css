@@ -1,0 +1,58 @@
+.randomDogContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #533d3d;
+}
+
+.randomDogContainer h1{
+    font-size: min(2rem, 6vw);
+    text-align: center;
+}
+
+.btnRandomDog{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.476);
+    border: 1px solid rgba(255, 255, 255, 0.476);
+    border-radius: 5px;
+    padding: .8rem;
+    margin: 1rem;
+    font-size: min(1rem, 3vw);
+    cursor: pointer;
+}
+
+.btnRandomDog:hover{
+    color: aliceblue;
+    border-color: aliceblue;
+}
+
+.imagem{
+    width: 50%;
+    height: 50%;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+@media (max-width: 900px){
+    .imagem{
+        width: 50%;
+        height: 300px;
+    }
+}
+
+@media (max-width: 670px){
+    .btnRandomDog{
+        width: 30%;
+        font-size: .7rem;
+    }
+    .imagem{
+        width: 80%;
+        height: 300px;
+    }
+}

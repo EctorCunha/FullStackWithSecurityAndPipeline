@@ -1,0 +1,32 @@
+.backToHome{
+    position: absolute;
+    inset: 0;
+    width: 20vw;
+    height: 5vw;
+    font-size: min(1.8rem, 2.5vw);
+    margin: 20px;
+    cursor: pointer;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+a {
+    text-decoration: none;
+    color: #51ac55;
+    
+}
+
+a:hover{
+    color: aquamarine;
+}
+
+@keyframes pulse{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.010);
+    }
+    100%{
+        transform: scale(1);
+    }
+}

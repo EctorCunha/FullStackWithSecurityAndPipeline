@@ -1,0 +1,303 @@
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90vw;
+}
+
+/* Formulário */
+.formContainer {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  width: 100%;
+  padding: 1rem;
+  margin: 5rem 0 2rem 0;
+  background-color: aqua;
+}
+
+.formCrud {
+  text-align: center;
+  background-color: rgb(57, 20, 60);
+}
+
+.titleCrud {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 1.5rem;
+}
+
+.inputCrud {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 40%;
+  height: 2rem;
+  margin: 0.5rem;
+}
+
+.inputCrud:focus {
+  outline: none;
+}
+
+.formBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  margin: 1rem;
+}
+
+.btnCrud {
+  width: 40%;
+  height: 2rem;
+  margin: auto;
+  background-color: #bfc98b;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.inputErrorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputErrorContainer p {
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin: 0.5rem;
+}
+
+/* Cards */
+.crudCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  justify-items: center;
+  width: 90vw;
+  margin-bottom: 2rem;
+}
+
+.userInfos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20rem;
+  padding: 1rem;
+  background-color: #bfc98b;
+  border-radius: 8px;
+}
+
+.labelCard{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.labelFields{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 30%;
+  margin-right: .2rem;
+}
+
+.fields {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 2rem;
+  color: #504842;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  height: 2rem;
+  gap: 1rem;
+}
+
+.icon {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1rem;
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.modalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.533);
+  position: fixed;
+  inset: 0;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80vw;
+  height: 60vh;
+  background-color: rgb(28, 26, 26);
+  position: fixed;
+  border-radius: 8px;
+}
+
+.modalView{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 60vw;
+  height: 50vh;
+  background-color: rgb(79, 111, 121);
+  position: fixed;
+  border-radius: 8px;
+}
+
+.modalDelete{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 60vw;
+  height:25vh;
+  gap: 1rem;
+  background-color: rgb(79, 111, 121);
+  position: fixed;
+  border-radius: 8px;
+}
+
+.EditTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 1.5rem;
+}
+
+.btnEditContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.labelInputContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2rem;
+  margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .labelInputContainer {
+    flex-direction: column;
+    margin-top: 1.5rem;
+  }
+}
+
+.labelEdit {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 20%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+@media (max-width: 651px) {
+  .labelEdit {
+    width: 30%;
+  }
+}
+
+.buttonEdit {
+  width: 100%;
+  height: 2rem;
+  margin: auto;
+  background-color: #6dbb5a;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: min(1.5rem, 1.5vw);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.editClose {
+  background-color: #cd6311;
+}
+
+
+.msg{
+  display:none;
+}
+
+.msgAdd{
+  display: none;
+}
+
+.msgSuccess{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  bottom: 0;
+  left: 0;
+  width: 35vw;
+  padding: 1rem;
+  height: 4rem;
+  margin: 1rem 1rem;
+  position: fixed;
+  background-color: #6dbb5a;
+  border-radius: 15px;
+  color: #fff;
+  animation: msgSuccess ease-in-out 3s;
+}
+
+@keyframes msgSuccess {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-30px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}

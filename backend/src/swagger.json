@@ -1,0 +1,397 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Register API Documentation",
+    "description": "Documentação para Register, Auth e Login",
+    "termsOfService": "http://swagger.io/terms/",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:5000",
+      "description": "API server"
+    }
+  ],
+  "paths": {
+    "/register/": {
+      "post": {
+        "summary": "Registrar um novo usuário",
+        "description": "Registrar um novo usuário",
+        "tags": [
+          "register"
+        ],
+        "operationId": "register",
+        "requestBody": {
+          "description": "User object that needs to be added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Jon Doe",
+                    "email": "jondoe@email.com",
+                    "telephone": "9999-9999",
+                    "address": "Avenida Jon Doe",
+                    "cpf": "Jon"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/register":{
+      "get": {
+        "summary": "Obter todos os usuários",
+        "description": "Obter todos os usuários",
+        "tags": [
+          "register"
+        ],
+        "operationId": "getUsers",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "name": "Jon Doe",
+                      "email": "jondoe@email.com",
+                      "telephone": "9999-9999",
+                      "address": "Avenida Jon Doe",
+                      "cpf": "Jon"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/register/{id}/":{
+      "put": {
+        "summary": "Atualizar um usuário",
+        "description": "Atualizar um usuário",
+        "tags": [
+          "register"
+        ],
+        "operationId": "updateUser",
+        "requestBody": {
+          "description": "User object that needs to be added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Jon Doe",
+                    "email": "jondoe@email.com",
+                    "telephone": "9999-9999",
+                    "address": "Avenida Jon Doe",
+                    "cpf": "Jon"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/register/{id}": {
+      "delete": {
+        "summary": "Deletar um usuário",
+        "description": "Deletar um usuário",
+        "tags": [
+          "register"
+        ],
+        "operationId": "deleteUser",
+        "requestBody": {
+          "description": "User object that needs to be added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Jon Doe",
+                    "email": "jondoe@email.com",
+                    "telephone": "9999-9999",
+                    "address": "Avenida Jon Doe",
+                    "cpf": "Jon"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/login/": {
+      "post": {
+        "summary": "Criar um login",
+        "description": "Criar um login",
+        "tags": [
+          "login"
+        ],
+        "operationId": "login",
+        "requestBody": {
+          "description": "User object that needs to be added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "username": "JonDoe",
+                    "password": "********"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/login":{
+      "get": {
+        "summary": "Obter todos os logins",
+        "description": "Obter todos os login",
+        "tags": [
+          "login"
+        ],
+        "operationId": "getUsers",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "username": "JonDoe",
+                      "password": "********"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/login/{id}":{
+      "delete": {
+        "summary": "Deletar um login",
+        "description": "Deletar um login",
+        "tags": [
+          "login"
+        ],
+        "operationId": "deleteUser",
+        "requestBody": {
+          "description": "User object that needs to be added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "username": "JonDoe",
+                    "password": "********"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Autenticar um usuário",
+        "description": "Autenticar um usuário",
+        "tags": [
+          "auth"
+        ],
+        "operationId": "auth",
+        "requestBody": {
+          "description": "User object that needs to be added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "userStatus": {
+            "type": "integer",
+            "format": "int32",
+            "description": "User Status"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+.homePage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60vw;
+    height: 15rem;
+    background-color: #9589b1;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20rem auto;
+    font-size: min(1.3rem, 2vw);
+    text-align: center;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+}
+
+@media (max-width: 900px){
+    .homePage{
+        height: 15rem;
+        margin: auto;
+        margin-top: 7rem;
+    }
+}
+
+
+@media (max-width: 670px){
+    .homePage{
+        height: 10rem;
+        margin-top: 7rem;
+    }
+}
