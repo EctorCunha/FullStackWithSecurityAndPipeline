@@ -7,3 +7,4 @@
 - Rodar storybook (frontend) `npm run storybook`.
 - Rodar testes (frontend) ` npm test`.
 - Swagger ("/doc")
+:)
