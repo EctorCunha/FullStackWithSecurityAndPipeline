@@ -1,128 +1,3 @@
-name: Push to release branch
-
-on:
-  push:
-    branches:
-      - release
-
-jobs:
-  install:
-    name: Install Dependencies
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Cache Node Modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            backend/node_modules
-            frontend/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
-
-      - name: Install Backend Dependencies
-        run: |
-          cd backend
-          npm install
-
-      - name: Install Frontend Dependencies
-        run: |
-          cd frontend
-          npm install
-
-  test:
-    name: Run Frontend Tests
-    runs-on: ubuntu-latest
-    needs: install
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Reuse Node Modules Cache
-        uses: actions/cache@v3
-        with:
-          path: frontend/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
-
-      - name: Run Frontend Tests
-        run: |
-          cd frontend
-          npm test
-
-  security:
-    name: Run Security Tests with Snyk
-    runs-on: ubuntu-latest
-    needs: install
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Reuse Node Modules Cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            backend/node_modules
-            frontend/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
-
-      - name: Install Snyk CLI
-        run: npm install -g snyk
-
-      - name: Authenticate Snyk
-        run: snyk auth ${{ secrets.SNYK_TOKEN }}
-
-      - name: Run Backend Snyk Security Tests
-        run: |
-          cd backend
-          snyk test
-
-      - name: Run Frontend Snyk Security Tests
-        run: |
-          cd frontend
-          snyk test
-
-  audit:
-    name: Run npm audit
-    runs-on: ubuntu-latest
-    needs: install
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Reuse Node Modules Cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            backend/node_modules
-            frontend/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
-
-      - name: Run npm audit on Backend
-        run: |
-          cd backend
-          npm audit
-
-      - name: Run npm audit on Frontend
-        run: |
-          cd frontend
-          npm audit
-
-
-# -------------------------------------------------------------
-
 # name: Push to release branch
 
 # on:
@@ -139,26 +14,20 @@ jobs:
 #       - name: Checkout code
 #         uses: actions/checkout@v3
 
-#       - name: Cache Backend Node Modules
+#       - name: Cache Node Modules
 #         uses: actions/cache@v3
 #         with:
-#           path: backend/node_modules
-#           key: ${{ runner.os }}-backend-${{ hashFiles('backend/package-lock.json') }}
+#           path: |
+#             backend/node_modules
+#             frontend/node_modules
+#           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
 #           restore-keys: |
-#             ${{ runner.os }}-backend-
+#             ${{ runner.os }}-node-modules-
 
 #       - name: Install Backend Dependencies
 #         run: |
 #           cd backend
 #           npm install
-
-#       - name: Cache Frontend Node Modules
-#         uses: actions/cache@v3
-#         with:
-#           path: frontend/node_modules
-#           key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
-#           restore-keys: |
-#             ${{ runner.os }}-frontend-
 
 #       - name: Install Frontend Dependencies
 #         run: |
@@ -174,13 +43,13 @@ jobs:
 #       - name: Checkout code
 #         uses: actions/checkout@v3
 
-#       - name: Cache Frontend Node Modules
+#       - name: Reuse Node Modules Cache
 #         uses: actions/cache@v3
 #         with:
 #           path: frontend/node_modules
-#           key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
+#           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
 #           restore-keys: |
-#             ${{ runner.os }}-frontend-
+#             ${{ runner.os }}-node-modules-
 
 #       - name: Run Frontend Tests
 #         run: |
@@ -196,21 +65,15 @@ jobs:
 #       - name: Checkout code
 #         uses: actions/checkout@v3
 
-#       - name: Cache Backend Node Modules
+#       - name: Reuse Node Modules Cache
 #         uses: actions/cache@v3
 #         with:
-#           path: backend/node_modules
-#           key: ${{ runner.os }}-backend-${{ hashFiles('backend/package-lock.json') }}
+#           path: |
+#             backend/node_modules
+#             frontend/node_modules
+#           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
 #           restore-keys: |
-#             ${{ runner.os }}-backend-
-
-#       - name: Cache Frontend Node Modules
-#         uses: actions/cache@v3
-#         with:
-#           path: frontend/node_modules
-#           key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
-#           restore-keys: |
-#             ${{ runner.os }}-frontend-
+#             ${{ runner.os }}-node-modules-
 
 #       - name: Install Snyk CLI
 #         run: npm install -g snyk
@@ -228,8 +91,6 @@ jobs:
 #           cd frontend
 #           snyk test
 
-# ---------------------------------------------------
-
 #   audit:
 #     name: Run npm audit
 #     runs-on: ubuntu-latest
@@ -239,21 +100,15 @@ jobs:
 #       - name: Checkout code
 #         uses: actions/checkout@v3
 
-#       - name: Cache Backend Node Modules
+#       - name: Reuse Node Modules Cache
 #         uses: actions/cache@v3
 #         with:
-#           path: backend/node_modules
-#           key: ${{ runner.os }}-backend-${{ hashFiles('backend/package-lock.json') }}
+#           path: |
+#             backend/node_modules
+#             frontend/node_modules
+#           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
 #           restore-keys: |
-#             ${{ runner.os }}-backend-
-
-#       - name: Cache Frontend Node Modules
-#         uses: actions/cache@v3
-#         with:
-#           path: frontend/node_modules
-#           key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
-#           restore-keys: |
-#             ${{ runner.os }}-frontend-
+#             ${{ runner.os }}-node-modules-
 
 #       - name: Run npm audit on Backend
 #         run: |
@@ -264,6 +119,151 @@ jobs:
 #         run: |
 #           cd frontend
 #           npm audit
+
+
+# -------------------------------------------------------------
+
+name: Push to release branch
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  install:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache Backend Node Modules
+        uses: actions/cache@v3
+        with:
+          path: backend/node_modules
+          key: ${{ runner.os }}-backend-${{ hashFiles('backend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-backend-
+
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Cache Frontend Node Modules
+        uses: actions/cache@v3
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-frontend-
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          npm install
+
+  test:
+    name: Run Frontend Tests
+    runs-on: ubuntu-latest
+    needs: install
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache Frontend Node Modules
+        uses: actions/cache@v3
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-frontend-
+
+      - name: Run Frontend Tests
+        run: |
+          cd frontend
+          npm test
+
+  security:
+    name: Run Security Tests with Snyk
+    runs-on: ubuntu-latest
+    needs: install
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache Backend Node Modules
+        uses: actions/cache@v3
+        with:
+          path: backend/node_modules
+          key: ${{ runner.os }}-backend-${{ hashFiles('backend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-backend-
+
+      - name: Cache Frontend Node Modules
+        uses: actions/cache@v3
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-frontend-
+
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      - name: Authenticate Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
+      - name: Run Backend Snyk Security Tests
+        run: |
+          cd backend
+          snyk test
+
+      - name: Run Frontend Snyk Security Tests
+        run: |
+          cd frontend
+          snyk test
+
+
+
+  audit:
+    name: Run npm audit
+    runs-on: ubuntu-latest
+    needs: install
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache Backend Node Modules
+        uses: actions/cache@v3
+        with:
+          path: backend/node_modules
+          key: ${{ runner.os }}-backend-${{ hashFiles('backend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-backend-
+
+      - name: Cache Frontend Node Modules
+        uses: actions/cache@v3
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-frontend-
+
+      - name: Run npm audit on Backend
+        run: |
+          cd backend
+          npm audit
+
+      - name: Run npm audit on Frontend
+        run: |
+          cd frontend
+          npm audit
 
 # --------------------------------------------------------------------------------------
 
