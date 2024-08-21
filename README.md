@@ -6,4 +6,4 @@
 - Rodar backend e frontend (nas pastas específicas) ` npm run dev`.
 - Rodar storybook (frontend) `npm run storybook`.
 - Rodar testes (frontend) ` npm test`.
-- Swagger ("/doc")  
+- Swagger ("/doc") 
