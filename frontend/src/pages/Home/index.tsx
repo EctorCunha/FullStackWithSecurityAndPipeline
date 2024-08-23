@@ -6,7 +6,7 @@ export function Home() {
     <>
       <Header />
       <div className="homePage">
-        <h1>Desafio SHARENERGY by Ector Cunha</h1>
+        <h1>:)</h1>
       </div>
     </>
   );

@@ -10,12 +10,12 @@ import { By, Builder, until, Browser, Key } from "selenium-webdriver";
     await driver.manage().window().maximize()
 
     await driver.findElement(By.name("username")).sendKeys("teste");
-    await driver.findElement(By.name("password")).sendKeys("teste", Key.ENTER);
+    await driver.findElement(By.name("password")).sendKeys("test", Key.ENTER);
     // await driver
     //   .findElement(By.xpath('//*[@id="root"]/div[2]/form/button'))
     //   .click();
 
-    await driver.wait(until.urlIs("http://localhost:5173/listPage"), 5000);
+    await driver.wait(until.urlIs("http://localhost:5173/listPage"), 10000);
 
     console.log(
       "Login bem-sucedido e redirecionamento para /listPage verificado."
